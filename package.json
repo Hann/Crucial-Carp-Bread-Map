@@ -1,0 +1,13 @@
+{
+  "name": "crucial-bread",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "express": "3.0.0rc1",
+    "jade": "*",
+    "mongolian" : "*"    
+  }
+}

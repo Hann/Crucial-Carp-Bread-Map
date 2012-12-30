@@ -1,0 +1,66 @@
+var Mongolian = require('mongolian');
+var ObjectId = Mongolian.ObjectId;
+var server = new Mongolian;
+var db = server.db('bread');
+var places = db.collection("places");
+var crypto = require('crypto');
+
+
+var handlers = {
+    'insert' : function(data){
+        places.insert(data);
+    },
+    'find' : function(condition) {
+        if (typeof condition !== 'undefind' ){
+            places.find(condition).forEach(function (data){
+
+            });
+        }
+        else {
+            places.find().forEach(function (data) {
+
+            });
+        }
+    },
+    'comment' : function(data) {
+        var sha1 = crypto.createHash('sha1');
+        sha1.update(data.password);
+        var password = sha1.digest('hex');
+        places.update({ '_id' : new ObjectId(data.id)}, { "$push" : { 'comment' : data.comment, 'password' : password}});
+    },
+    'update' : function(data) {
+
+    },
+    'retrieveComments' : function(data) {
+        var cursor = places.find( { '_id' : new ObjectId(data.id)});
+    },
+    'coordinates' : function(callback){
+        var cursor = places.find( {} , { 'lat' : 1 , 'lng' : 1 });
+        cursor.toArray(function (err, array) {
+            callback(array);
+	});
+
+    }
+};
+
+// on function은 ㅈㄴ ㅆㄷㅇㄷ.
+var on = function(command, handler) {
+    if(!(command in handlers)){
+        handlers[command] = [];
+    }
+    handlers[command] = handler;
+};
+
+var emit = function(command, data) {
+    if(!(command in handlers)){
+        return ;
+    }
+    handlers[command](data);
+};
+
+exports.db = function(){
+    return {
+        on : on,
+        emit : emit
+    }
+}

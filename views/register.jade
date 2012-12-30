@@ -1,0 +1,28 @@
+extends layout
+
+block content
+    .container-fluid
+        .row-fluid
+            .span9
+                .alert.alert-info 붕어빵이 있는 장소에 클릭 & 터치해주세요 :)
+                #map-canvas
+            .span3
+                form(action="/register", method="POST")
+                    legend
+                        h2 정보
+                    div.input-wrap
+                        label(for="name") 이름
+                        input(name="name",type="text",id="name",placeholder="이름을 지어주세요")
+                    div.input-wrap
+                        label(for="place") 장소
+                        input(name="place",type="text",id="place",placeholder="장소를 설명해주세요")
+                    input#lat(name="lat",type="hidden")
+                    input#lng(name="lng",type="hidden")
+                    button.btn#regist 등록하기
+
+block stylesheets
+    link(rel="stylesheet", href="stylesheets/register.css")
+block javascripts
+    script(type="text/javascript",src="https://maps.google.com/maps/api/js?sensor=false")
+    script(type="text/javascript",src="javascripts/map.js")
+    script(type="text/javascript",src="javascripts/register.js")
