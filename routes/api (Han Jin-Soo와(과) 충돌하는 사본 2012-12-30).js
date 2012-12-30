@@ -18,7 +18,7 @@ exports.retrieve = function(req, res){
     db.emit('retrieveComments', {
         'id' : req.params.id
     }, function(array) {
-        // mareker don't recommend that '_id' to be string.
+        // mareker don't recommend that '_id'  string.
         array[0]._id = array[0]._id.toString();
 
         if ( array.length === 0 ){
