@@ -17,6 +17,10 @@ $(document).ready(function() {
     $('#regist').click(function() {
         var comment = $('#write').val();
         var password = $('#password').val();
+        if (comment === "" || password === ""){
+            alert("입력을 빼먹으셨네요 :-)");
+            return false;
+        }
         var template = '<li class="comment" >' +
             '<div class ="comment-content">' + comment + '</div>' +
             '<a class ="comment-delete"><i class="icon-remove"></i></a>'+
@@ -34,8 +38,8 @@ $(document).ready(function() {
                 alert('등록이 완료되었습니다.');
             },
             error : function(err) {
-                console.log(err);
                 alert('실패했네요ㅠㅠ 다시해주세요ㅠㅠ');
+                $('li.comment').last().remove();
             }
         });
     });
