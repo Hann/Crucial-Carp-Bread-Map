@@ -50,7 +50,7 @@ $('#regist').click(function() {
         "2. 이름은 잘 작성했는지. \n" +
         "3. 설명은 누가봐도 이해하도록 작성했는지. \n\n" +
         "모두 다 맞게 쓰셨다면 확인을 눌러주세요 :)")){
-        if (!clickedMarker && nameValid && placeValid){
+        if (clickedMarker && nameValid && placeValid){
             var position = clickedMarker.getPosition();
             var lat = position.Ya;
             var lng = position.Za;
