@@ -1,7 +1,7 @@
 @import url('http://api.mobilis.co.kr/webfonts/css/?fontface=NanumPenWeb');
 
 body {
-    font-family: 'Nanum Pen Script', serif;
+    font-family: 'NanumPenWeb';
 }
 
 #map-canvas {
